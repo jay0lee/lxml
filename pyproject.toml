@@ -11,6 +11,11 @@ skip = [
     "cp36-*",
     "pp36-",
     "cp37-*",
+    "cp38-*",
+    "cp39-*",
+    "cp310-*",
+    "cp311-*",
+    "cp312-*",
     "pp37-*",
     "pp38-*",
     "pp*-manylinux_i686",
@@ -34,7 +39,7 @@ skip = [
 #test-command = "python {package}/test.py -vv"
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "aarch64", "i686", "ppc64le", "s390x", "armv7l"]
+archs = ["x86_64", "aarch64"]
 repair-wheel-command = "auditwheel repair --strip -w {dest_dir} {wheel}"
 
 [tool.cibuildwheel.linux.environment]
@@ -63,11 +68,11 @@ inherit.environment = "append"
 environment.CFLAGS = "-O3 -g1 -pipe -fPIC -flto -march=armv8-a -mtune=cortex-a72"
 
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86", "ARM64"]
+archs = ["AMD64", "ARM64"]
 
 [tool.cibuildwheel.macos]
 # https://cibuildwheel.readthedocs.io/en/stable/faq/#what-to-provide suggests to provide
 # x86_64 and one of universal2 or arm64 wheels.  x86_64 is still required by older pips,
 # so additional arm64 wheels would suffice.  However, since the library build uses a mixed
 # amd64/arm64 setup, we build universal2 wheels regardless.
-archs = ["x86_64", "universal2"]
+archs = []
